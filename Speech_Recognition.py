@@ -6,14 +6,18 @@ r = sr.Recognizer()
 with sr.Microphone() as source:
     print("You have the stage!")
     audio = r.listen(source)
-    
+    r.adjust_for_ambient_noise(source)
    # Recognize speech using Sphinx | Offline 
     try:
-        print("Sphinx thinks you said: " + r.recognize_sphinx(audio_data=audio))
+        print("Whisper thinks you said: " + r.recognize_whisper(audio_data=audio,
+                                                                   language='fr',
+                                                                   model="medium"))
+        # models to use ['tiny.en', 'tiny', 'base.en', 'base', 'small.en', 'small', 'medium.en',
+        #  'medium', 'large-v1', 'large-v2', 'large-v3', 'large', 'large-v3-turbo', 'turbo']
     except sr.UnknownValueError:
-        print("Sphinx encoutered an unkown error")
+        print("Whisper encoutered an unkown error")
     except sr.RequestError as e:
-        print("Sphinx error: {0}".format(e))
+        print("Whisper error: {0}".format(e))
 
 # Converting audio file to text
 #audio_file = "data\harvard2.wav"
@@ -23,7 +27,8 @@ with sr.Microphone() as source:
 
 # recognize audio using Sphinx | Offline 
 #try:
-#    print("Sphinx thinks you said: " + r.recognize_sphinx(audio_data=audio, language="fr-FR"))
+#    print("Sphinx thinks you said: " + r.recognize_s
+# phinx(audio_data=audio, language="fr-FR"))
 #except sr.UnknownValueError:
 #    print("Sphinx could not understand audio file given")
 #except sr.RequestError as e:
