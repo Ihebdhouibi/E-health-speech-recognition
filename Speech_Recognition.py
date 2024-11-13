@@ -16,14 +16,14 @@ import speech_recognition as sr
 #        print("Sphinx error: {0}".format(e))
 
 # Converting audio file to text
-audio_file = "data\harvard.wav"
+audio_file = "data\harvard2.wav"
 r = sr.Recognizer()
 with sr.AudioFile(audio_file) as source:
     audio = r.record(source)
 
 # recognize audio using Sphinx | Offline 
 try:
-    print("Sphinx thinks you said: " + r.recognize_sphinx(audio))
+    print("Sphinx thinks you said: " + r.recognize_sphinx(audio_data=audio, language="fr-FR"))
 except sr.UnknownValueError:
     print("Sphinx could not understand audio file given")
 except sr.RequestError as e:
