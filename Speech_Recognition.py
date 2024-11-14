@@ -12,8 +12,7 @@ with sr.Microphone() as source:
         print("Whisper thinks you said: " + r.recognize_whisper(audio_data=audio,
                                                                    language='fr',
                                                                    model="medium"))
-        # models to use ['tiny.en', 'tiny', 'base.en', 'base', 'small.en', 'small', 'medium.en',
-        #  'medium', 'large-v1', 'large-v2', 'large-v3', 'large', 'large-v3-turbo', 'turbo']
+                                                                   
     except sr.UnknownValueError:
         print("Whisper encoutered an unkown error")
     except sr.RequestError as e:
