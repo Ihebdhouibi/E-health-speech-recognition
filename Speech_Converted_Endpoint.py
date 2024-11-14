@@ -1,8 +1,8 @@
-from typing import Union
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from pydub import AudioSegment
 import os
 import tempfile
+import speech_recognition as sr
 
 app = FastAPI()
 
@@ -22,7 +22,9 @@ async def read_voice(file: UploadFile = File()):
     try:
         with sr.AudioFile(temp_audio_path) as source:
             audio_data = recognizer.record(source)
-            transcription = recognizer.recognize_google(audio_data)
+            transcription = recognizer.recognize_whisper(audio_data=audio_data,
+                                                                   language='fr',
+                                                                   model="medium")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing audio file: {e}")
     finally:
